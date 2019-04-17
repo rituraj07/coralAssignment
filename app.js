@@ -54,7 +54,7 @@ req.body.phone
   });
 });
 app.get("/search",function(req,res){
-  
+  //console.log("here");
   var sqlq ="SELECT * FROM userData WHERE emailId = '"+req.query.q+"'";
   connection.query(sqlq, function (err, result) {
     if (err) {
@@ -71,7 +71,8 @@ app.delete("/delete",function(req,res){
     if (err) {
       res.status(404).json({msg:'Something went wrong'});  
       throw err;}
-    res.status(200).json({msg:'Record with Email: '+req.body.email+' deleted sucessfully'});
+      console.log(result.affectedRows);
+    res.status(200).json({msg:result.affectedRows});
   });
 });
-  app.listen(process.env.PORT || 3000);
+  app.listen( 3000);
