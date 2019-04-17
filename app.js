@@ -75,4 +75,4 @@ app.delete("/delete",function(req,res){
     res.status(200).json({msg:result.affectedRows});
   });
 });
-  app.listen( 3000);
+  app.listen( process.env.PORT||3000);
