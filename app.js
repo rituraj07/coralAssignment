@@ -1,6 +1,7 @@
 var express = require("express");
 var mysql = require('mysql');
 var bodyParser = require("body-parser");
+var bcrypt = require('bcrypt');
 require('dotenv').config();
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,7 +29,8 @@ connection.connect(function(err) {
 
 app.post("/insert",function(req,res){
 console.log(req.body.password);
-var p=req.body.password;
+let p = bcrypt.hashSync(req.body.password, 1);
+console.log(p);
 let sqlq = "INSERT INTO userData(userName,emailId,phoneNo,password,dateTime) VALUES('"
 +req.body.username
 +"','"
