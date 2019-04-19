@@ -41,7 +41,7 @@ class MainPage extends React.Component {
       .then(response => response.json())
       .then((responseData) =>{
         //alert(responseData.msg);
-        this.setState({msg:responseData.msg,username:"",email:"",password:"",phone:""})
+        this.setState({msg:responseData.msg.toString(),username:"",email:"",password:"",phone:""})
       });
       }
 
@@ -67,14 +67,19 @@ class MainPage extends React.Component {
        {this.state.msg}
       </div>
     }
-    { this.state.msg==="Record added sucessfully" &&
+    { this.state.msg==="1" &&
         <div style={alertStyle} class="alert alert-success" role="alert">
-  {this.state.msg}
+  Record added sucessfully
+</div>
+    }
+    { this.state.msg==="2" &&
+        <div style={alertStyle} class="alert alert-success" role="alert">
+  Record updated sucessfully
 </div>
     }
 <div class="row"> 
 <div   style={divStyle}>
-<center><h1>Login</h1></center>
+<center><h1>Insert Data</h1></center>
 <form onSubmit={this.submitForm}>
    <div class="form-group">
        <input class="form-control" value={this.state.username}  type="text" name="username" placeholder="Username"  onChange={this.handelChange} required></input>
