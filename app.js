@@ -19,12 +19,12 @@ connection.connect(function(err) {
       console.error('Database connection failed: ' + err.stack);
       return;
     }
-  
+  /*
     console.log('Connected to database.');
     connection.query("SELECT * FROM userData", function (err, result, fields) {
         if (err) throw err;
         console.log(result);
-      });
+      });*/
   });
 
 app.post("/insert",function(req,res){
@@ -43,7 +43,7 @@ req.body.phone
 +req.body.dt
 +"') ON DUPLICATE KEY UPDATE userName='"
 +req.body.username
-+"',password='"+req.body.password
++"',password='"+p
 +"',phoneNo='"+req.body.phone
 +"',dateTime='"+req.body.dt
 +"'";
@@ -52,7 +52,8 @@ req.body.phone
     if (err) {
       res.status(404).json({msg:'Something went wrong'});  
       throw err;}
-    res.status(200).json({msg:'Record added sucessfully'});
+      console.log(result);
+    res.status(200).json({msg:result.affectedRows});
   });
 });
 app.get("/search",function(req,res){
@@ -77,4 +78,4 @@ app.delete("/delete",function(req,res){
     res.status(200).json({msg:result.affectedRows});
   });
 });
-  app.listen( process.env.PORT||3000);
+  app.listen(process.env.PORT|| 3000);
